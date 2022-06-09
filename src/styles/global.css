@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap");
+
+:root {
+    --editor-content-width: 650px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: 'PT Sans', sans-serif;
+  font-weight: 400;
+  background-color: #fff;
+  color: #212121;
+}
