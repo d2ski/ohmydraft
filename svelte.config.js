@@ -12,6 +12,7 @@ const config = {
 					$components: path.resolve('./src/components'),
 					$styles: path.resolve('./src/styles'),
 					$svg: path.resolve('./src/svg'),
+					$stores: path.resolve('./src/stores'),
 				}
 			},
 			plugins: [svg()]

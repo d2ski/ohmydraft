@@ -3,6 +3,3 @@
 </script>
 
 <Editor />
-
-<style>
-</style>
