@@ -59,17 +59,19 @@
 
 <style>
 	.toolbar__controls {
-		margin-top: 1rem;
 		height: 42px;
 		width: var(--editor-content-width);
-		border-radius: 6px;
-		background-color: #f3f4f6;
+		border-radius: var(--toolbars-border-radius);
+		background-color: var(--toolbars-background-color);
+		backdrop-filter: blur(1px);
+		border: var(--toolbars-border);
 		padding: 6px 12px;
 		display: flex;
 		flex-direction: row;
 		align-items: center;
 		justify-content: space-around;
-		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+		position: sticky;
+		top: 1.5rem;
 	}
 
 	.toolbar__controls_marks {
@@ -77,7 +79,7 @@
 	}
 
 	.btn-control-mark {
-		border: 1px solid #d1d5db;
+		border: none;
 		border-radius: 3px;
 		width: 28px;
 		height: 20px;
@@ -86,7 +88,7 @@
 	}
 
 	.btn-control-mark:hover {
-		border: 2px solid #fafaf9;
+		border: 3px solid var(--color-accent);
 	}
 
 	.btn-control-mark-remove {
@@ -95,11 +97,17 @@
 		border: none;
 		background-color: transparent;
 		cursor: pointer;
-		fill: #212121;
-		stroke: #212121;
-		stroke-width: 5px;
+		fill: var(--toolbars-color);
+		stroke: var(--toolbars-color);
+		stroke-width: 6px;
 		text-align: center;
 		line-height: 0;
+	}
+
+	.btn-control-mark-remove:hover {
+		fill: var(--color-accent);
+		stroke: var(--color-accent);
+		stroke-width: 5px;
 	}
 
 	.btn-control-mark-remove span {
@@ -116,19 +124,19 @@
 
 	.btn-control-header {
 		background-color: transparent;
-		border: 1px solid #d1d5db;
+		border: none;
+		color: var(--toolbars-color);
 		border-radius: 3px;
 		width: 28px;
 		height: 20px;
 		margin-right: 7px;
 		cursor: pointer;
-		font-weight: 400;
-		font-size: 14px;
-		color: #212121;
-		line-height: 14px;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 16px;
 	}
 
 	.btn-control-header:hover {
-		border: 2px solid #fafaf9;
+		color: var(--color-accent);
 	}
 </style>

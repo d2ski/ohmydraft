@@ -36,40 +36,44 @@ function addVersion() {
 
 <style>
 	.versions-tabs {
-		height: 42px;
-		width: var(--editor-content-width);
-		border-radius: 6px;
-		background-color: #1e293b;
-		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
-		padding: 6px 12px;
+        height: 50vh;
+        min-height: 50vh;
+		width: 42px;
+		border-radius: var(--toolbars-border-radius);
+		background-color: var(--toolbars-background-color);
+		border: var(--toolbars-border);
+		padding: 12px 6px;
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		align-items: center;
+        margin-top: 1.5rem;
+        position: sticky;
+        top: 84px;
 	}
 
 	.versions-tabs__container {
 		position: relative;
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		align-items: center;
 		padding: 0;
 	}
 
-	.versions-tabs__container::before {
+	.versions-tabs__container::after {
 		content: '';
 		position: absolute;
-		top: 50%;
-		left: 2px;
-		background-color: #fff;
-		outline: 2px solid #fff;
-		height: 0px;
-		width: calc(100% - 4px);
+		top: 2px;
+		left: 50%;
+		background-color: var(--toolbars-color);
+		outline: 2px solid var(--toolbars-color);
+		height: calc(100% - 4px);
+		width: 0px;
 	}
 
 	.versions-tab {
-		background-color: #1e293b;
-		color: #fafaf9;
-		border: 2px solid #fafaf9;
+		background-color: var(--toolbars-background-color-opaque);
+		color: var(--toolbars-color);
+		border: 3px solid var(--toolbars-color);
 		border-radius: 50%;
 		padding: 0;
 		margin: 0;
@@ -78,35 +82,34 @@ function addVersion() {
 		height: 20px;
 		line-height: 0px;
 		font-size: 12px;
-		margin-right: 12px;
+		margin-bottom: 12px;
 		transition: all 0.2s ease-in-out;
 		z-index: 1;
 	}
 
 	.versions-tab:last-of-type {
-		margin-right: 0;
+		margin-bottom: 0;
 	}
 
 	.versions-tab.active {
-		border: 4px solid #2dd4bf;
-		background-color: #fafaf9;
-		color: #1e293b;
+		border: 4px solid var(--color-accent);
+		background-color: var(--toolbars-color);
 	}
 
 	.versions-add-tab {
 		background-color: transparent;
 		fill: none;
-		stroke: #2dd4bf;
+		stroke: var(--toolbars-color);
 		stroke-width: 8px;
 		border: none;
 		width: 14px;
 		height: 14px;
-		margin-left: 12px;
+		margin-top: 12px;
 		cursor: pointer;
 		transition: all 0.2s ease-in-out;
 	}
 
 	.versions-add-tab:hover {
-		stroke: #fafaf9;
+		stroke: var(--color-accent);
 	}
 </style>
