@@ -1,38 +1,63 @@
 <script>
-    import {versions, editorContent, currentVersion} from '$stores/content.js';
+	import { versions, editorContent, currentVersion } from '$stores/content.js';
 	import cross from '$svg/cross.svg';
 
-    const markColors = ['#EECC6680', '#EE99AA80', '#6699CC80'];
+	const markColors = ['#EECC6680', '#EE99AA80', '#6699CC80'];
+
+	const styleH1 = {
+		'font-size': '3rem',
+		'line-height': '3.5rem',
+		'margin-bottom': '1.5rem'
+	}
+
+	const styleH2 = {
+		'font-size': '2.5rem',
+		'line-height': '3rem',
+		'margin-bottom': '1.25rem'
+	}
+
+	const styleH3 = {
+		'font-size': '2rem',
+		'line-height': '2.5rem',
+		'margin-bottom': '1rem'
+	}
 
 	function syncContent() {
 		$versions[$currentVersion].content = $editorContent.innerHTML;
 	}
 
-	function markString(color) {
+	function stringifyCSS(props) {
+		return Object.entries(props)
+			.map(([k, v]) => `${k}: ${v};`)
+			.join(' ');
+	}
+
+	function addTag(tag, props) {
 		const selection = document.getSelection();
 		const range = selection.getRangeAt(0);
+		const markNode = document.createElement(tag);
 
-		const markNode = document.createElement('mark');
-		markNode.innerHTML = selection.toString();
-		markNode.style.backgroundColor = color;
-
+		markNode.textContent = selection.toString();
+		if (props) markNode.style.cssText = stringifyCSS(props);
 		range.deleteContents();
 		range.insertNode(markNode);
+
 		syncContent();
 	}
 
-	function removeMarkString() {
+	function deleteTag() {
 		const selection = document.getSelection();
 		const range = selection.getRangeAt(0);
-		range.selectNode(selection.anchorNode.parentNode);
-
 		const markNode = document.createTextNode(selection.toString());
+
+		range.selectNode(selection.anchorNode.parentNode);
 		range.deleteContents();
 		range.insertNode(markNode);
 
 		range.commonAncestorContainer.normalize();
 		syncContent();
 	}
+
 </script>
 
 <div class="toolbar__controls">
@@ -41,19 +66,19 @@
 			<button
 				class="btn-control-mark"
 				style="background-color: {color};"
-				on:click={() => markString(color)}
+				on:click={() => addTag('mark', { 'background-color': color })}
 			/>
 		{/each}
 
-		<button class="btn-control-mark-remove" on:click={removeMarkString}
+		<button class="btn-control-mark-remove" on:click={deleteTag}
 			><span>{@html cross}</span></button
 		>
 	</div>
 
 	<div class="toolbar__controls_headers">
-		<button class="btn-control-header" on:click={removeMarkString}>H1</button>
-		<button class="btn-control-header" on:click={removeMarkString}>H2</button>
-		<button class="btn-control-header" on:click={removeMarkString}>H3</button>
+		<button class="btn-control-header" on:click={() => addTag('h1', styleH1)}>H1</button>
+		<button class="btn-control-header" on:click={() => addTag('h2', styleH2)}>H2</button>
+		<button class="btn-control-header" on:click={() => addTag('h3', styleH3)}>H3</button>
 	</div>
 </div>
 
