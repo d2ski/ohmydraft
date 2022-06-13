@@ -1,65 +1,11 @@
 <script>
 	import { versions, editorContent, currentVersion } from '$stores/content.js';
-	import cross from '$svg/cross.svg';
 
 	const markColors = ['#EECC6680', '#EE99AA80', '#6699CC80'];
-
-	const styleH1 = {
-		'font-size': '3rem',
-		'line-height': '3.5rem',
-		margin: '1.5rem 0'
-	};
-
-	const styleH2 = {
-		'font-size': '2.5rem',
-		'line-height': '3rem',
-		margin: '1.25rem 0'
-	};
-
-	const styleH3 = {
-		'font-size': '2rem',
-		'line-height': '2.5rem',
-		margin: '1rem 0'
-	};
+	const headerLevels = [1, 2, 3];
 
 	function syncContent() {
 		$versions[$currentVersion].content = $editorContent.innerHTML;
-	}
-
-	function stringifyCSS(props) {
-		return Object.entries(props)
-			.map(([k, v]) => `${k}: ${v};`)
-			.join(' ');
-	}
-
-	function addTag(tag, props) {
-		const selection = document.getSelection();
-		if (selection.isCollapsed) return;
-
-		const range = selection.getRangeAt(0);
-		const markNode = document.createElement(tag);
-
-		markNode.textContent = selection.toString();
-		if (props) markNode.style.cssText = stringifyCSS(props);
-		range.deleteContents();
-		range.insertNode(markNode);
-
-		syncContent();
-	}
-
-	function deleteTag() {
-		const selection = document.getSelection();
-		if (selection.isCollapsed || selection.anchorNode.parentNode.id === 'editorContainer') return;
-
-		const markNode = document.createTextNode(selection.toString());
-		const range = selection.getRangeAt(0);
-		range.selectNode(selection.anchorNode.parentNode);
-
-		range.deleteContents();
-		range.insertNode(markNode);
-
-		range.commonAncestorContainer.normalize();
-		syncContent();
 	}
 </script>
 
@@ -69,17 +15,20 @@
 			<button
 				class="btn-control-mark"
 				style="background-color: {color};"
-				on:click={() => addTag('mark', { 'background-color': color })}
+				on:click={() => $editorContent.chain().focus().toggleHighlight({ color: color }).run()}
+				class:active={$editorContent.isActive('highlight', { color })}
 			/>
 		{/each}
-
-		<button class="btn-control-mark-remove" on:click={deleteTag}><span>{@html cross}</span></button>
 	</div>
 
 	<div class="toolbar__controls_headers">
-		<button class="btn-control-header" on:click={() => addTag('h1', styleH1)}>H1</button>
-		<button class="btn-control-header" on:click={() => addTag('h2', styleH2)}>H2</button>
-		<button class="btn-control-header" on:click={() => addTag('h3', styleH3)}>H3</button>
+		{#each headerLevels as level}
+			<button
+				class="btn-control-header"
+				on:click={() => $editorContent.chain().focus().toggleHeading({ level }).run()}
+				class:active={$editorContent.isActive('heading', { level })}>{`H${level}`}</button
+			>
+		{/each}
 	</div>
 </div>
 
@@ -98,6 +47,7 @@
 		justify-content: space-around;
 		position: sticky;
 		top: 1.5rem;
+		z-index: 999;
 	}
 
 	.toolbar__controls_marks {
@@ -117,31 +67,8 @@
 		border: 3px solid var(--color-accent);
 	}
 
-	.btn-control-mark-remove {
-		width: 20px;
-		height: 20px;
-		border: none;
-		background-color: transparent;
-		cursor: pointer;
-		fill: var(--toolbars-color);
-		stroke: var(--toolbars-color);
-		stroke-width: 6px;
-		text-align: center;
-		line-height: 0;
-	}
-
-	.btn-control-mark-remove:hover {
-		fill: var(--color-accent);
-		stroke: var(--color-accent);
-		stroke-width: 5px;
-	}
-
-	.btn-control-mark-remove span {
-		width: 13px;
-		height: 13px;
-		line-height: 0;
-		transform: rotate(45deg);
-		display: inline-block;
+	.btn-control-mark.active {
+		border: 3px solid var(--color-accent);
 	}
 
 	.toolbar__controls_headers {
@@ -160,9 +87,15 @@
 		font-weight: 700;
 		font-size: 16px;
 		line-height: 16px;
+		text-align: center;
+		padding: 0px;
 	}
 
 	.btn-control-header:hover {
+		color: var(--color-accent);
+	}
+
+	.btn-control-header.active {
 		color: var(--color-accent);
 	}
 </style>

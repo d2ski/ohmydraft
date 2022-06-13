@@ -1,43 +1,47 @@
 <script>
-import {versions, currentVersion, editorContent} from '$stores/content.js';
-import cross from '$svg/cross.svg';
+	import { versions, currentVersion, editorContent } from '$stores/content.js';
+	import cross from '$svg/cross.svg';
 
-function addVersion() {
-		$versions.push({
-			content: $versions[$currentVersion].content
-		});
+	function addVersion() {
+		$versions.push($editorContent.getJSON());
 		$versions = $versions;
 		$currentVersion = $versions.length - 1;
-		$editorContent.focus();
+		switchVersion($currentVersion);
 	}
 
 	function removeVersion(idx) {
 		$versions.splice(idx, 1);
 		$versions = $versions;
 		$currentVersion = Math.min(idx, $versions.length - 1);
-		$editorContent.focus();
+		switchVersion($currentVersion);
+	}
+
+	function switchVersion(idx) {
+		$currentVersion = idx;
+		$editorContent.commands.setContent($versions[idx]);
+		$editorContent.commands.focus();
 	}
 </script>
 
 <div class="versions-tabs">
-    <span class="versions-tabs__container">
-        {#each $versions as version, idx}
-            <button
-                on:click={() => ($currentVersion = idx)}
-                on:contextmenu|preventDefault={() => removeVersion(idx)}
-                class="versions-tab"
-                class:active={$currentVersion === idx}
-            />
-        {/each}
-    </span>
+	<span class="versions-tabs__container">
+		{#each $versions as version, idx}
+			<button
+				on:click={() => switchVersion(idx)}
+				on:contextmenu|preventDefault={() => removeVersion(idx)}
+				class="versions-tab"
+				class:active={$currentVersion === idx}
+			/>
+		{/each}
+	</span>
 
-    <button on:click={addVersion} class="versions-add-tab">{@html cross}</button>
+	<button on:click={addVersion} class="versions-add-tab">{@html cross}</button>
 </div>
 
 <style>
 	.versions-tabs {
-        height: 50vh;
-        min-height: 50vh;
+		height: 50vh;
+		min-height: 50vh;
 		width: 48px;
 		border-radius: var(--toolbars-border-radius);
 		background-color: var(--toolbars-background-color);
@@ -46,9 +50,9 @@ function addVersion() {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-        margin-top: 1.5rem;
-        position: sticky;
-        top: 84px;
+		margin-top: 1.5rem;
+		position: sticky;
+		top: 84px;
 	}
 
 	.versions-tabs__container {
