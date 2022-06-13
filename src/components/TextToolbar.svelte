@@ -1,12 +1,8 @@
 <script>
-	import { versions, editorContent, currentVersion } from '$stores/content.js';
+	import { editorContent } from '$stores/content.js';
 
 	const markColors = ['#EECC6680', '#EE99AA80', '#6699CC80'];
 	const headerLevels = [1, 2, 3];
-
-	function syncContent() {
-		$versions[$currentVersion].content = $editorContent.innerHTML;
-	}
 </script>
 
 <div class="toolbar__controls">
