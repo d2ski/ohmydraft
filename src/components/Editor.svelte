@@ -17,6 +17,7 @@
 		<div
 			contenteditable="true"
 			class="editor__content"
+			id="editorContainer"
 			bind:innerHTML={$versions[$currentVersion].content}
 			bind:this={$editorContent}
 			style="font-size: {contentFontSize}rem; line-height: {contentLineHeight}rem;"

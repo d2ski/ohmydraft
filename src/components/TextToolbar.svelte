@@ -7,20 +7,20 @@
 	const styleH1 = {
 		'font-size': '3rem',
 		'line-height': '3.5rem',
-		'margin-bottom': '1.5rem'
-	}
+		margin: '1.5rem 0'
+	};
 
 	const styleH2 = {
 		'font-size': '2.5rem',
 		'line-height': '3rem',
-		'margin-bottom': '1.25rem'
-	}
+		margin: '1.25rem 0'
+	};
 
 	const styleH3 = {
 		'font-size': '2rem',
 		'line-height': '2.5rem',
-		'margin-bottom': '1rem'
-	}
+		margin: '1rem 0'
+	};
 
 	function syncContent() {
 		$versions[$currentVersion].content = $editorContent.innerHTML;
@@ -34,6 +34,8 @@
 
 	function addTag(tag, props) {
 		const selection = document.getSelection();
+		if (selection.isCollapsed) return;
+
 		const range = selection.getRangeAt(0);
 		const markNode = document.createElement(tag);
 
@@ -47,17 +49,18 @@
 
 	function deleteTag() {
 		const selection = document.getSelection();
-		const range = selection.getRangeAt(0);
-		const markNode = document.createTextNode(selection.toString());
+		if (selection.isCollapsed || selection.anchorNode.parentNode.id === 'editorContainer') return;
 
+		const markNode = document.createTextNode(selection.toString());
+		const range = selection.getRangeAt(0);
 		range.selectNode(selection.anchorNode.parentNode);
+
 		range.deleteContents();
 		range.insertNode(markNode);
 
 		range.commonAncestorContainer.normalize();
 		syncContent();
 	}
-
 </script>
 
 <div class="toolbar__controls">
@@ -70,9 +73,7 @@
 			/>
 		{/each}
 
-		<button class="btn-control-mark-remove" on:click={deleteTag}
-			><span>{@html cross}</span></button
-		>
+		<button class="btn-control-mark-remove" on:click={deleteTag}><span>{@html cross}</span></button>
 	</div>
 
 	<div class="toolbar__controls_headers">
@@ -84,7 +85,7 @@
 
 <style>
 	.toolbar__controls {
-		height: 42px;
+		height: 48px;
 		width: var(--editor-content-width);
 		border-radius: var(--toolbars-border-radius);
 		background-color: var(--toolbars-background-color);

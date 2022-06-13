@@ -38,7 +38,7 @@ function addVersion() {
 	.versions-tabs {
         height: 50vh;
         min-height: 50vh;
-		width: 42px;
+		width: 48px;
 		border-radius: var(--toolbars-border-radius);
 		background-color: var(--toolbars-background-color);
 		border: var(--toolbars-border);
