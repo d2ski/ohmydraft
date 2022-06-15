@@ -1,11 +1,15 @@
 <script>
-	import { versions, currentVersion, editorContent } from '$stores/content.js';
+	import { versions, currentVersion, versionsTimeExtent, editorContent } from '$stores/content.js';
 	import cross from '$svg/cross.svg';
+	import { scaleLinear } from 'd3-scale';
 
 	function addVersion() {
-		$versions.push($editorContent.getJSON());
+		const newVersion = $editorContent.getJSON();
+		newVersion.updated = Date.now();
+		$versions.push(newVersion);
 		$versions = $versions;
 		$currentVersion = $versions.length - 1;
+
 		switchVersion($currentVersion);
 	}
 
@@ -21,6 +25,8 @@
 		$editorContent.commands.setContent($versions[idx]);
 		$editorContent.commands.focus();
 	}
+
+	$: versionsScale = scaleLinear().domain($versionsTimeExtent).range([0, 1]);
 </script>
 
 <div class="versions-tabs">
@@ -31,6 +37,7 @@
 				on:contextmenu|preventDefault={() => removeVersion(idx)}
 				class="versions-tab"
 				class:active={$currentVersion === idx}
+				style={`background-color: rgba(30, 41, 59, ${versionsScale(version.updated)});`}
 			/>
 		{/each}
 	</span>
@@ -64,19 +71,8 @@
 		padding: 0;
 	}
 
-	.versions-tabs__container::after {
-		content: '';
-		position: absolute;
-		top: 2px;
-		left: 50%;
-		background-color: var(--toolbars-color);
-		outline: 2px solid var(--toolbars-color);
-		height: calc(100% - 4px);
-		width: 0px;
-	}
-
 	.versions-tab {
-		background-color: var(--toolbars-background-color-opaque);
+		/* background-color: var(--toolbars-background-color-opaque); */
 		color: var(--toolbars-color);
 		border: 3px solid var(--toolbars-color);
 		border-radius: 50%;
@@ -90,15 +86,31 @@
 		margin-bottom: 12px;
 		transition: all 0.2s ease-in-out;
 		z-index: 1;
+		position: relative;
+	}
+
+	.versions-tab::after {
+		content: '';
+		position: absolute;
+		top: 19px;
+		left: 50%;
+		background-color: var(--toolbars-color);
+		outline: 2px solid var(--toolbars-color);
+		height: 10px;
+		width: 0px;
 	}
 
 	.versions-tab:last-of-type {
 		margin-bottom: 0;
 	}
 
+	.versions-tab:last-of-type::after {
+		content: none;
+	}
+
 	.versions-tab.active {
 		border: 4px solid var(--color-accent);
-		background-color: var(--toolbars-color);
+		/* background-color: var(--toolbars-color); */
 	}
 
 	.versions-add-tab {

@@ -16,9 +16,11 @@
 		"@tiptap/core": "^2.0.0-beta.176",
 		"@tiptap/extension-highlight": "^2.0.0-beta.33",
 		"@tiptap/starter-kit": "^2.0.0-beta.185",
+		"d3-scale": "^4.0.2",
 		"prettier": "^2.5.1",
 		"prettier-plugin-svelte": "^2.5.0",
 		"svelte": "^3.44.0",
+		"text-readability": "^1.0.5",
 		"vite-plugin-svgstring": "^1.0.0"
 	},
 	"type": "module"

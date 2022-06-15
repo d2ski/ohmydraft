@@ -1,5 +1,5 @@
 <script>
-	import { versions, editorContent, currentVersion } from '$stores/content.js';
+	import { editorContent } from '$stores/content.js';
 	import TextToolbar from '$components/TextToolbar.svelte';
 	import VersionsBar from '$components/VersionsBar.svelte';
 	import Tiptap from '$components/Tiptap.svelte';
@@ -11,15 +11,6 @@
 		{#if $editorContent}
 			<TextToolbar />
 		{/if}
-
-		<!-- <div
-			contenteditable="true"
-			class="editor__content"
-			id="editorContainer"
-			bind:innerHTML={$versions[$currentVersion].content}
-			bind:this={$editorContent}
-			style="font-size: {contentFontSize}rem; line-height: {contentLineHeight}rem;"
-		/> -->
 
 		<Tiptap />
 	</div>

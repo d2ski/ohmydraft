@@ -3,7 +3,7 @@
 	import { Editor } from '@tiptap/core';
 	import StarterKit from '@tiptap/starter-kit';
   import Highlight from '@tiptap/extension-highlight'
-	import { versions, currentVersion, editorContent } from '$stores/content.js';
+	import { versions, currentVersion, editorContent, versionsTimeExtent } from '$stores/content.js';
 
 	let element;
 
@@ -28,7 +28,11 @@
 			},
       onUpdate: ({editor}) => {
         const json = editor.getJSON();
+		json.updated = Date.now();
         $versions[$currentVersion] = json;
+
+		console.log('versions', $versions);
+		console.log('versionsTimeExtent', $versionsTimeExtent);
       }
 		});
 	});
