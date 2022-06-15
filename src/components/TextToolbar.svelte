@@ -1,5 +1,5 @@
 <script>
-	import { editorContent } from '$stores/content.js';
+	import { editorContent } from '$stores/versions';
 
 	const markColors = ['#EECC6680', '#EE99AA80', '#6699CC80'];
 	const headerLevels = [1, 2, 3];

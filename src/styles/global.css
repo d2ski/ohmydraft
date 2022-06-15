@@ -13,6 +13,9 @@
     
     --color-accent: #2dd4bf;
     --content-color: #1e293b;
+
+    --editor-font-size: 1.75rem;
+    --editor-line-height: 2.75rem;
 }
 
 * {
@@ -36,11 +39,11 @@ body {
 .editor__content {
   background-color: var(--background-color);
   color: var(--content-color);
-  padding: 4.5rem 3rem 3rem 4.5rem;
+  padding: 3rem 3rem 3rem 4.5rem;
   width: var(--editor-content-width);
   min-height: 70vh;
-  font-size: 1.75rem;
-  line-height: 2.75rem;
+  font-size: var(--editor-font-size);
+  line-height: var(--editor-line-height);
 }
 
 .editor__content:active,
@@ -64,4 +67,8 @@ body {
   font-size: 2rem;
   line-height: 2.5rem;
   margin: 1rem 0;
+}
+
+.editor__content p {
+  margin: 1.75rem 0;
 }

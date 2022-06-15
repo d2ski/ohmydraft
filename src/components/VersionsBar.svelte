@@ -1,5 +1,5 @@
 <script>
-	import { versions, currentVersion, versionsTimeExtent, editorContent } from '$stores/content.js';
+	import { versions, currentVersion, versionsTimeExtent, editorContent } from '$stores/versions';
 	import cross from '$svg/cross.svg';
 	import { scaleLinear } from 'd3-scale';
 

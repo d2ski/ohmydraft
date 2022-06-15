@@ -13,6 +13,7 @@ const config = {
 					$styles: path.resolve('./src/styles'),
 					$svg: path.resolve('./src/svg'),
 					$stores: path.resolve('./src/stores'),
+					$utils: path.resolve('./src/utils'),
 				}
 			},
 			plugins: [svg()]

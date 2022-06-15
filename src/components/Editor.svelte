@@ -1,8 +1,10 @@
 <script>
-	import { editorContent } from '$stores/content.js';
+	import { editorContent } from '$stores/versions';
 	import TextToolbar from '$components/TextToolbar.svelte';
 	import VersionsBar from '$components/VersionsBar.svelte';
 	import Tiptap from '$components/Tiptap.svelte';
+	import VersionStats from '$components/VersionStats.svelte';
+
 </script>
 
 <div class="editor__wrapper">
@@ -14,6 +16,8 @@
 
 		<Tiptap />
 	</div>
+
+	<VersionStats />
 </div>
 
 <style>

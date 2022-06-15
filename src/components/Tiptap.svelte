@@ -2,8 +2,9 @@
 	import { onMount, onDestroy } from 'svelte';
 	import { Editor } from '@tiptap/core';
 	import StarterKit from '@tiptap/starter-kit';
-  import Highlight from '@tiptap/extension-highlight'
-	import { versions, currentVersion, editorContent, versionsTimeExtent } from '$stores/content.js';
+	import Highlight from '@tiptap/extension-highlight';
+	import { versions, currentVersion, editorContent } from '$stores/versions';
+	import { getWordsCount, getReadingTime, getARI } from '$utils/text-stats';
 
 	let element;
 
@@ -26,14 +27,21 @@
 				// force re-render so `editor.isActive` works as expected
 				$editorContent = $editorContent;
 			},
-      onUpdate: ({editor}) => {
-        const json = editor.getJSON();
-		json.updated = Date.now();
-        $versions[$currentVersion] = json;
-
-		console.log('versions', $versions);
-		console.log('versionsTimeExtent', $versionsTimeExtent);
-      }
+			onUpdate: ({ editor }) => {
+				const json = editor.getJSON();
+				const text = editor.getText()
+				const words = getWordsCount(text);
+				const readTime = getReadingTime(words);
+				const readability = getARI(text);
+				const updated = Date.now();
+				$versions[$currentVersion] = {
+					...json,
+					words,
+					readTime,
+					readability,
+					updated
+				};
+			}
 		});
 	});
 
@@ -44,4 +52,4 @@
 	});
 </script>
 
-<div bind:this={element} spellcheck="true"/>
+<div bind:this={element} spellcheck="true" />
