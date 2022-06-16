@@ -26,4 +26,14 @@ export const versionsTimeExtent = derived(versions, ($versions) => {
   return [Math.min(...times), Math.max(...times)];
 });
 
+export const versionsReadabilityExtent = derived(versions, ($versions) => {
+  const scores = $versions.map((v) => v.readability);
+  return [0, Math.max(...scores)];
+});
+
+export const versionsWordsExtent = derived(versions, ($versions) => {
+  const words = $versions.map((v) => v.words);
+  return [0, Math.max(...words)];
+});
+
 export const editorContent = writable();

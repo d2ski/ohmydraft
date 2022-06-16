@@ -6,6 +6,9 @@
 	function addVersion() {
 		const newVersion = $editorContent.getJSON();
 		newVersion.updated = Date.now();
+		newVersion.words = $versions[$currentVersion].words;
+		newVersion.readTime = $versions[$currentVersion].readTime;
+		newVersion.readability = $versions[$currentVersion].readability;
 		$versions.push(newVersion);
 		$versions = $versions;
 		$currentVersion = $versions.length - 1;

@@ -4,7 +4,7 @@
 	import StarterKit from '@tiptap/starter-kit';
 	import Highlight from '@tiptap/extension-highlight';
 	import { versions, currentVersion, editorContent } from '$stores/versions';
-	import { getWordsCount, getReadingTime, getARI } from '$utils/text-stats';
+	import { getWordsCount, getSentenceCount, getReadingTime, getARI } from '$utils/text-stats';
 
 	let element;
 
@@ -31,16 +31,20 @@
 				const json = editor.getJSON();
 				const text = editor.getText()
 				const words = getWordsCount(text);
+				const sentences = getSentenceCount(text);
 				const readTime = getReadingTime(words);
 				const readability = getARI(text);
 				const updated = Date.now();
 				$versions[$currentVersion] = {
 					...json,
 					words,
+					sentences,
 					readTime,
 					readability,
 					updated
 				};
+
+				console.log(text);
 			}
 		});
 	});

@@ -2,12 +2,14 @@
 	import { editorContent } from '$stores/versions';
 	import TextToolbar from '$components/TextToolbar.svelte';
 	import VersionsBar from '$components/VersionsBar.svelte';
+	import VersionsStatsTable from '$components/VersionsStatsTable.svelte';
 	import Tiptap from '$components/Tiptap.svelte';
-	import VersionStats from '$components/VersionStats.svelte';
+	import CurrentVersionStats from '$components/CurrentVersionStats.svelte';
 
 </script>
 
 <div class="editor__wrapper">
+	<VersionsStatsTable />
 	<VersionsBar />
 	<div class="editor__container">
 		{#if $editorContent}
@@ -17,7 +19,7 @@
 		<Tiptap />
 	</div>
 
-	<VersionStats />
+	<CurrentVersionStats />
 </div>
 
 <style>
