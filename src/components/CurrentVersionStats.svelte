@@ -1,17 +1,19 @@
 <script>
 	import { versions, currentVersion } from '$stores/versions';
 	import { fmtReadTime } from '$utils/helpers';
+
+	$: ({words, sentences, readTime, readability} = $versions[$currentVersion]);
 </script>
 
 <div class="version-stats__container">
 	<div class="version-stats">
 		<div class="version-stats__readability">
-			<div class="value">{$versions[$currentVersion].readability}</div>
+			<div class="value">{readability ? readability : 0}</div>
 			<div>readability score</div>
 		</div>
-		<div class="version-stats__words"><span class="value">{$versions[$currentVersion].words} words</span></div>
-		<div class="version-stats__sentences"><span class="value">{$versions[$currentVersion].sentences} sentences</span></div>
-		<div class="version-stats__time"><span  class="value">{fmtReadTime($versions[$currentVersion].readTime)}</span> to read</div>
+		<div class="version-stats__words"><span class="value">{words ? words : 0} words</span></div>
+		<div class="version-stats__sentences"><span class="value">{sentences ? sentences : 0} sentences</span></div>
+		<div class="version-stats__time"><span  class="value">{readTime ? fmtReadTime(readTime) : '0 sec'}</span> to read</div>
 	</div>
 </div>
 
@@ -27,6 +29,7 @@
 	.version-stats {
 		border: 3px solid var(--color-accent);
 		border-radius: 6px;
+		width: 126px;
 
 		position: sticky;
 		top: 84px;

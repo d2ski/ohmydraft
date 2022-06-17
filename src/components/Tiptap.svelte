@@ -43,8 +43,6 @@
 					readability,
 					updated
 				};
-
-				console.log(text);
 			}
 		});
 	});

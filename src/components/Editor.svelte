@@ -8,7 +8,7 @@
 
 </script>
 
-<div class="editor__wrapper">
+<div class="editor__wrapper" class:hide={!$editorContent}>
 	<VersionsStatsTable />
 	<VersionsBar />
 	<div class="editor__container">
@@ -33,5 +33,9 @@
 	.editor__container {
 		padding: 1.5rem;
 		height: 100%;
+	}
+
+	.hide {
+		display: none;
 	}
 </style>

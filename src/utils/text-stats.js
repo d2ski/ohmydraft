@@ -7,10 +7,7 @@ export const getWordsCount = function (text) {
 };
 
 export const getSentenceCount = function (text) {
-  // return rs.sentenceCount(text);
-
   let ignoreCount = 0;
-  // let sentences = text.split(/ *[.?!]['")\]]*[ |\n](?=[A-Z])/g)
   let sentences = text.split(/[\.\!]+(?!\d)\s*|\n+\s*/);
   for (let sentence of sentences) {
     if (rs.lexiconCount(sentence) <= 2) ignoreCount += 1;
@@ -26,5 +23,17 @@ export const getReadingTime = function (words) {
 };
 
 export const getARI = function (text) {
-  return Math.ceil(rs.automatedReadabilityIndex(text));
+  const characters = rs.charCount(text);
+  const words = rs.lexiconCount(text);
+  const sentences = getSentenceCount(text);
+
+  const averageCharacterPerWord = characters / words;
+  const averageWordPerSentence = words / sentences;
+  const readability =
+    4.71 * Math.legacyRound(averageCharacterPerWord, 2) +
+    0.5 * Math.legacyRound(averageWordPerSentence, 2) -
+    21.43;
+  const returnVal = Math.legacyRound(readability, 0);
+
+  return !isNaN(returnVal) && returnVal > 0 ? returnVal : 0;
 };

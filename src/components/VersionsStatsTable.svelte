@@ -6,19 +6,14 @@
 
 <div class="versions-stats">
 	<div class="versions-stats__container">
-		{#each $versions as version}
+		{#each $versions as { readTime, readability, words }}
 			<div class="versions-stats__row">
 				<div class="versions-stats__row__stats">
-					<div class="stats-time">{fmtReadTime(version.readTime)}</div>
-					<div class="stats-readability">{version.readability}</div>
-					<div class="stats-words">{version.words}</div>
+					<div class="stats-time">{readTime ? fmtReadTime(readTime) : '0 sec'}</div>
+					<div class="stats-readability">{readability ? readability : 0}</div>
+					<div class="stats-words">{words ? words : 0}</div>
 				</div>
-				<VersionStatsChart
-					width="80"
-					height="20"
-					readability={version.readability}
-					words={version.words}
-				/>
+				<VersionStatsChart width="80" height="20" {readability} {words} />
 			</div>
 		{/each}
 	</div>

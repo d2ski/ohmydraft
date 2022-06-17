@@ -7,6 +7,7 @@
 		const newVersion = $editorContent.getJSON();
 		newVersion.updated = Date.now();
 		newVersion.words = $versions[$currentVersion].words;
+		newVersion.sentences = $versions[$currentVersion].sentences;
 		newVersion.readTime = $versions[$currentVersion].readTime;
 		newVersion.readability = $versions[$currentVersion].readability;
 		$versions.push(newVersion);
