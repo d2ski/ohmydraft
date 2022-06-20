@@ -4,9 +4,9 @@
 	import StarterKit from '@tiptap/starter-kit';
 	import Highlight from '@tiptap/extension-highlight';
 	import { versions, currentVersion, editorContent } from '$stores/versions';
-	import { getWordsCount, getCharsCount, getReadingTime, calcARI, docSentencesData } from '$utils/text-stats';
+	import { getWordsCount, getCharsCount, getReadingTime, calcARI } from '$utils/text-stats';
 
-	import {Linter} from '$utils/linter.js';
+	import { Linter } from '$utils/linter.js';
 
 	let element;
 
@@ -23,7 +23,7 @@
 				Highlight.configure({
 					multicolor: true
 				}),
-				Linter,
+				Linter
 			],
 			content: $versions[$currentVersion],
 			onTransaction: () => {
@@ -31,14 +31,13 @@
 				$editorContent = $editorContent;
 			},
 			onUpdate: ({ editor }) => {
+				const sentences = $versions[$currentVersion].sentences;
 				const json = editor.getJSON();
-				const text = editor.getText()
+				const text = editor.getText();
 				const words = getWordsCount(text);
 				const chars = getCharsCount(text);
 				const readTime = getReadingTime(words);
 				const updated = Date.now();
-
-				const sentences = docSentencesData(editor.state.doc);
 				const readability = calcARI(chars, words, sentences.length);
 
 				$versions[$currentVersion] = {
@@ -49,15 +48,6 @@
 					readability,
 					updated
 				};
-
-				// editor.state.doc.descendants((node, pos, parent, index) => {
-				// 	console.log('------')
-				// 	console.log('node', node)
-				// 	console.log('pos', pos)
-				// 	console.log('parent', parent)
-				// 	console.log('index', index)
-				// });
-
 			}
 		});
 	});

@@ -9,7 +9,7 @@
 	<div class="version-stats">
 		<div class="version-stats__readability">
 			<div class="value">{readability ? readability : 0}</div>
-			<div>readability score</div>
+			<div>readability</div>
 		</div>
 		<div class="version-stats__words"><span class="value">{words ? words : 0} words</span></div>
 		<div class="version-stats__sentences"><span class="value">{sentences ? sentences.length : 0} sentences</span></div>

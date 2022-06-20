@@ -4,50 +4,28 @@ import { Extension } from "@tiptap/core";
 
 import { versions, currentVersion } from "$stores/versions";
 import { get } from "svelte/store";
+import { docSentencesData, READABILITY_LEVELS } from "$utils/text-stats";
 
-function lint() {
-  // let result = [];
-  // let docSentences = [];
-
-  // function record(msg, from, to, fix) {
-  //   result.push({ msg, from, to, fix });
-  // }
-
-  // // For each node in the document
-  // doc.descendants((node, pos) => {
-  //   if (node.isText) {
-  //     [...node.text.matchAll(SENTENCE_MATCH)].forEach((match) => {
-  //       // lint
-  //       const posFrom = pos + match.index;
-  //       const posTo = posFrom + match[0].length;
-  //       const sentence = match[0];
-  //       record("Message", posFrom, posTo);
-
-  //       // save sentences
-  //       docSentences.push({ posFrom, posTo });
-
-  //       console.log(match, posFrom, posTo, sentence);
-  //     });
-  //   }
-  // });
-
-  // sentences.set(docSentences);
-
-  // return result;
-
+function lint(doc) {
   const ver = get(versions);
   const currentVer = get(currentVersion);
+  const sentences = docSentencesData(doc);
 
-  return ver[currentVer].sentences;
+  ver[currentVer].sentences = sentences;
+  versions.set(ver);
+
+  return sentences;
 }
 
 function lintDeco(doc) {
   let decos = [];
-  lint().forEach((sent) => {
-    if (sent.readability > 10) {
-      decos.push(
-        Decoration.inline(sent.from, sent.to, { class: "sentence-highlight" })
-      );
+  lint(doc).forEach((sent) => {
+    if (sent.readability >= READABILITY_LEVELS.NORMAL) {
+      const level =
+        sent.readability <= READABILITY_LEVELS.HARD
+          ? "readability-hard"
+          : "readability-very-hard";
+      decos.push(Decoration.inline(sent.from, sent.to, { class: level }));
     }
   });
   return DecorationSet.create(doc, decos);

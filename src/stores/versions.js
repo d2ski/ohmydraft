@@ -4,7 +4,7 @@ export const versions = writable([
   {
     type: "doc",
     updated: Date.now(),
-    sentences: [{from: 0, to: 0}],
+    sentences: [{from: 0, to: 0, readability: 0}],
     content: [
       {
         type: "paragraph",

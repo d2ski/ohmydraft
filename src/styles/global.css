@@ -74,8 +74,10 @@ body {
   margin: 1.75rem 0;
 }
 
-.sentence-highlight{
-  background-color: rgb(255, 0, 0, 0.3);
-  border-bottom: 3px solid rgb(255, 0, 0, 0.3);
+.readability-hard{
+  border-bottom: 3px solid #d4d4d4;
+}
 
+.readability-very-hard{
+  border-bottom: 3px solid #fca5a5;
 }

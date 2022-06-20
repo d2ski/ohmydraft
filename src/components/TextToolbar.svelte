@@ -1,12 +1,12 @@
 <script>
 	import { editorContent } from '$stores/versions';
 
-	const markColors = ['#EECC6680', '#EE99AA80', '#6699CC80'];
+	// const markColors = ['#EECC6680', '#EE99AA80', '#6699CC80'];
 	const headerLevels = [1, 2, 3];
 </script>
 
 <div class="toolbar__controls">
-	<div class="toolbar__controls_marks">
+	<!-- <div class="toolbar__controls_marks">
 		{#each markColors as color}
 			<button
 				class="btn-control-mark"
@@ -15,7 +15,7 @@
 				class:active={$editorContent.isActive('highlight', { color })}
 			/>
 		{/each}
-	</div>
+	</div> -->
 
 	<div class="toolbar__controls_headers">
 		{#each headerLevels as level}
@@ -40,13 +40,13 @@
 		display: flex;
 		flex-direction: row;
 		align-items: center;
-		justify-content: space-around;
+		justify-content: flex-end;
 		position: sticky;
 		top: 1.5rem;
 		z-index: 999;
 	}
 
-	.toolbar__controls_marks {
+	/* .toolbar__controls_marks {
 		display: flex;
 	}
 
@@ -65,7 +65,7 @@
 
 	.btn-control-mark.active {
 		border: 3px solid var(--color-accent);
-	}
+	} */
 
 	.toolbar__controls_headers {
 		display: flex;

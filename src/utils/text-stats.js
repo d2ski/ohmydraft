@@ -5,6 +5,11 @@ import { get } from "svelte/store";
 const WORDS_PER_MINUTE = 200;
 export const SENTENCE_SPLIT = /[\.\!]+(?!\d)\s*|\n+\s*/;
 export const SENTENCE_MATCH = /[^.!?\s][^.!?\n]*(?:[.!?](?!['"]?\s|$)[^.!?]*)*[.!?]?['"]?(?=\s|$)/g;
+export const READABILITY_LEVELS = {
+  NORMAL: 11,
+  HARD: 15,
+  VERY_HARD: Infinity,
+};
 
 export const getWordsCount = function (text) {
   return rs.lexiconCount(text, true);
@@ -12,7 +17,7 @@ export const getWordsCount = function (text) {
 
 export const getCharsCount = function (text) {
   return rs.charCount(text);
-}
+};
 
 export const getSentenceCount = function () {
   const ver = get(versions);
@@ -40,7 +45,6 @@ export const calcARI = function (characters, words, sentences) {
 };
 
 export const getARI = function (text, isSentence = false) {
-  console.log("getARI");
   const characters = rs.charCount(text);
   const words = rs.lexiconCount(text);
   const sentences = isSentence ? 1 : getSentenceCount();
