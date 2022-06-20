@@ -12,7 +12,7 @@
 			<div>readability score</div>
 		</div>
 		<div class="version-stats__words"><span class="value">{words ? words : 0} words</span></div>
-		<div class="version-stats__sentences"><span class="value">{sentences ? sentences : 0} sentences</span></div>
+		<div class="version-stats__sentences"><span class="value">{sentences ? sentences.length : 0} sentences</span></div>
 		<div class="version-stats__time"><span  class="value">{readTime ? fmtReadTime(readTime) : '0 sec'}</span> to read</div>
 	</div>
 </div>

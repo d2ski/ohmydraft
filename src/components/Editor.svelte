@@ -5,7 +5,6 @@
 	import VersionsStatsTable from '$components/VersionsStatsTable.svelte';
 	import Tiptap from '$components/Tiptap.svelte';
 	import CurrentVersionStats from '$components/CurrentVersionStats.svelte';
-
 </script>
 
 <div class="editor__wrapper" class:hide={!$editorContent}>
