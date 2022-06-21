@@ -6,14 +6,17 @@
 
 <div class="versions-stats">
 	<div class="versions-stats__container">
-		{#each $versions as { readTime, readability, words }}
+		{#each $versions as { readTime, words }}
 			<div class="versions-stats__row">
 				<div class="versions-stats__row__stats">
 					<div class="stats-time">{readTime ? fmtReadTime(readTime) : '0 sec'}</div>
-					<div class="stats-readability">{readability ? readability : 0}</div>
-					<div class="stats-words">{words ? words : 0}</div>
+					<!-- <div class="stats-readability">{readability ? readability : 0}</div> -->
+					<div class="stats-words">{words ? words : 0} words</div>
 				</div>
-				<VersionStatsChart width="80" height="20" {readability} {words} />
+				<div class="versions-stats__row__chart">
+
+					<VersionStatsChart width="80" height="2" {words} />
+				</div>
 			</div>
 		{/each}
 	</div>
@@ -49,9 +52,8 @@
 		font-size: 14px;
 		margin-bottom: 12px;
 		display: flex;
-		flex-direction: row;
+		flex-direction: column;
 		align-items: center;
-		gap: 12px;
 		width: 100%;
 	}
 
@@ -59,24 +61,31 @@
 		width: 100%;
 		height: 100%;
 		display: grid;
-		grid-template-columns: 2fr 1fr 2fr;
+		grid-template-columns: 2fr 2fr;
 		column-gap: 6px;
 		text-align: right;
 		align-items: center;
+		margin-right: 12px;
+	}
+
+	.versions-stats__row__chart {
+		width: 100%;
+		text-align: right;
+		line-height: 0;
 	}
 
 	.stats-time {
 		color: #a3a3a3;
 	}
 
-	.stats-readability {
+	/* .stats-readability {
 		color: #171717;
-	}
+	} */
 
 	.stats-words {
 		color: #a3a3a3;
 		text-align: left;
-		border-left: 1px solid #a3a3a3;
+
 		padding-left: 6px;
 	}
 </style>

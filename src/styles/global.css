@@ -16,6 +16,9 @@
 
     --editor-font-size: 1.75rem;
     --editor-line-height: 2.75rem;
+
+    --readability-hard-color: #d4d4d4;
+    --readability-very-hard-color: #fca5a5;
 }
 
 * {
@@ -75,9 +78,9 @@ body {
 }
 
 .readability-hard{
-  border-bottom: 3px solid #d4d4d4;
+  border-bottom: 2px solid var(--readability-hard-color);
 }
 
 .readability-very-hard{
-  border-bottom: 3px solid #fca5a5;
+  border-bottom: 2px solid var(--readability-very-hard-color);
 }
