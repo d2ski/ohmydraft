@@ -25,15 +25,14 @@
 <style>
 	.versions-stats {
 		height: 100%;
+		width: 100%;
 		min-height: 50vh;
 		padding: 14px 0;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
+		align-items: right;
 		margin-top: 1.5rem;
 		margin-bottom: 1.5rem;
-		position: sticky;
-		top: 84px;
 	}
 
 	.versions-stats__container {
@@ -48,24 +47,22 @@
 		padding: 0;
 		margin: 0;
 		height: 20px;
+		width: 100%;
 		line-height: 14px;
 		font-size: 14px;
 		margin-bottom: 12px;
 		display: flex;
 		flex-direction: column;
-		align-items: center;
-		width: 100%;
 	}
 
 	.versions-stats__row__stats {
 		width: 100%;
 		height: 100%;
 		display: grid;
-		grid-template-columns: 2fr 2fr;
-		column-gap: 6px;
+		grid-template-columns: 1fr 2fr;
+		column-gap: 4px;
 		text-align: right;
-		align-items: center;
-		margin-right: 12px;
+		padding-right: 10px;
 	}
 
 	.versions-stats__row__chart {
@@ -76,16 +73,11 @@
 
 	.stats-time {
 		color: #a3a3a3;
+		text-align: right;
 	}
-
-	/* .stats-readability {
-		color: #171717;
-	} */
 
 	.stats-words {
 		color: #a3a3a3;
-		text-align: left;
-
-		padding-left: 6px;
+		text-align: right;
 	}
 </style>

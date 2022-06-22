@@ -51,8 +51,6 @@
 
 <style>
 	.versions-tabs {
-		height: 100%;
-		min-height: 50vh;
 		width: 48px;
 		border-radius: var(--toolbars-border-radius);
 		background-color: var(--toolbars-background-color);
@@ -63,8 +61,6 @@
 		align-items: center;
 		margin-top: 1.5rem;
 		margin-bottom: 1.5rem;
-		position: sticky;
-		top: 84px;
 	}
 
 	.versions-tabs__container {

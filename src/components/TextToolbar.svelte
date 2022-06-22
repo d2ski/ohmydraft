@@ -42,7 +42,7 @@
 		align-items: center;
 		justify-content: flex-end;
 		position: sticky;
-		top: 1.5rem;
+		top: 12px;
 		z-index: 999;
 	}
 

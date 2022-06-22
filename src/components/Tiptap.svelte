@@ -48,6 +48,8 @@
 					readability,
 					updated
 				};
+
+				console.log($versions[$currentVersion])
 			}
 		});
 	});

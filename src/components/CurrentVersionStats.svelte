@@ -20,20 +20,15 @@
 <style>
 	.version-stats__container {
 		padding-left: 15px;
-		display: flex;
-		flex-direction: row;
-		justify-content: space-around;
-		align-items: flex-start;
+		position: sticky;
+		top: 84px;
+		
 	}
 
 	.version-stats {
 		border: 3px solid var(--color-accent);
 		border-radius: 6px;
 		width: 126px;
-
-		position: sticky;
-		top: 84px;
-
 		color: #A3A3A3;
 		font-size: 14px;
 		line-height: 18px;

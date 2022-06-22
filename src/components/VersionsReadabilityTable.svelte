@@ -28,8 +28,6 @@
 		align-items: center;
 		margin-top: 1.5rem;
 		margin-bottom: 1.5rem;
-		position: sticky;
-		top: 84px;
 	}
 
 	.versions-readability__container {
