@@ -5,7 +5,6 @@
 	import Highlight from '@tiptap/extension-highlight';
 	import { versions, currentVersion, editorContent } from '$stores/versions';
 	import { getWordsCount, getCharsCount, getReadingTime, calcARI } from '$utils/text-stats';
-
 	import { Linter } from '$utils/linter.js';
 
 	let element;
@@ -49,9 +48,11 @@
 					updated
 				};
 
-				console.log($versions[$currentVersion])
+				console.log($versions[$currentVersion]);
 			}
 		});
+
+		$editorContent.commands.focus('end');
 	});
 
 	onDestroy(() => {

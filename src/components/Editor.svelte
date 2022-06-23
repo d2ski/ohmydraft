@@ -7,6 +7,7 @@
 	import VersionsReadabilityTable from '$components/VersionsReadabilityTable.svelte';
 	import Tiptap from '$components/Tiptap.svelte';
 	import CurrentVersionStats from '$components/CurrentVersionStats.svelte';
+
 </script>
 
 <div class="editor__wrapper" class:hide={!$editorContent}>

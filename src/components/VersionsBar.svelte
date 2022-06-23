@@ -18,6 +18,7 @@
 	}
 
 	function removeVersion(idx) {
+		if ($versions.length === 1) return;
 		$versions.splice(idx, 1);
 		$versions = $versions;
 		$currentVersion = Math.min(idx, $versions.length - 1);
